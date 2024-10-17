@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:43:06 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/12 20:39:07 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:39:20 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int initialize_fds(int ***table, int n)
 			return (-1);
 		i++;
     }
-	return (0);
+	return (i);
 }
 void close_fd(int *n)
 {
@@ -68,7 +68,8 @@ void close_fd(int *n)
     }
 }
 
-void multi_util(t_minishell *data, char **cmd, int read_fd, int print, int *to_close) {
+void multi_util(t_minishell *data, char **cmd, int read_fd, int print, int *to_close)
+{
     int fork_res = fork();
     if (fork_res == -1)
 	{
@@ -84,7 +85,7 @@ void multi_util(t_minishell *data, char **cmd, int read_fd, int print, int *to_c
         }
         if (print != 1)
 		{
-            if (dup2(print, 1) == -1) perror("dup2 print");
+            if (dup2(print, 1) == -1) perror(cmd[0]);
             close(print);
         }
         // char **args = ft_split(cmd, ' ');
@@ -100,37 +101,35 @@ void multi_util(t_minishell *data, char **cmd, int read_fd, int print, int *to_c
 int multi_commands(t_minishell *data)
 {
     int size;
-    // int pipe_fd[2][2];
     int **pipe_fd;
 	int i;
+	set_args *args;
+	args = data->commands;
+	size = ft_lstsize_c(args);
 
-	size = ft_lstsize_c(data->commands);
-	// pipe_fd = pipe_fd[size][2];
-	if (initialize_fds(&pipe_fd, size) == -1)
+	if (initialize_fds(&pipe_fd, size-1) == -1)
 		return (-1);
 	i = 0;
-	// sleep 5 | ls
-    while (i < size)
+    while (i < (size))
 	{
-        if (i < size - 1 && pipe(pipe_fd[i]) == -1)
+        if ((i < size - 1))
 		{
-            perror("pipe error");
-            return -1;
+			if (pipe(pipe_fd[i]) != 0)
+				return(perror("pipe error"), -1);
         }
         if (i == 0)
-            multi_util(data, data->commands->args, 0, pipe_fd[0][1], (int[]){pipe_fd[0][0], -1});
-        else if (i < size - 1)
-		{
-            multi_util(data, data->commands->args, pipe_fd[i - 1][0], pipe_fd[i][1], (int[]){pipe_fd[i-1][1], pipe_fd[i][0], -1}); 
-			data->commands = data->commands->next;
-		}
-        else
-            multi_util(data, data->commands->args, pipe_fd[i - 1][0], 1, (int[]){pipe_fd[i - 1][1], -1});
+            multi_util(data, args->args, 0, pipe_fd[0][1], (int[]){pipe_fd[0][0], -1});
+        else if (i == (size -1))
+            multi_util(data, args->args, pipe_fd[i - 1][0], 1, (int[]){pipe_fd[i - 1][1], -1});
+        // else if ((i < size - 1) && (i > 0))
+		else
+            multi_util(data, args->args, pipe_fd[i - 1][0], pipe_fd[i][1], (int[]){/*pipe_fd[i-1][1], pipe_fd[i][0],*/ -1}); 
         if (i > 0)
             close(pipe_fd[i - 1][0]);
         if (i < size - 1)
             close(pipe_fd[i][1]);
 		i++;
+		args = args->next;
     }
     // Close any remaining pipe ends (cleanup)
     for (int j = 0; j < size - 1; j++) {

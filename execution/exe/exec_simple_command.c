@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:47:49 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/12 20:03:05 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/17 15:27:39 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,9 @@ int	exec_smpl_cmnd(t_minishell *data)
 	if (fork_res == 0)
 	{
 		exec_res = execve(path, data->commands->args, (data->env));
-		// handle_access_cases (access (path, X_OK));
-		// if (access(path, X_OK) != 0)
-		// {
-			ft_putstr_fd ("minishell :",2);			
-			// free(path);
-			return (perror (path), 127);
-		// }
+		ft_putstr_fd ("minishell :", 2);
+		free (path);
+		return (perror (path), 127);
 	}
 	else
 	{
@@ -84,5 +80,5 @@ int	exec_smpl_cmnd(t_minishell *data)
 		// ft_free_table(&data->commands); // chech for exit status
 		free (path);
 	}
-	return(0);
+	return (0);
 }

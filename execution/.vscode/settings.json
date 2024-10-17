@@ -3,7 +3,8 @@
 		"minishell.h": "c",
 		"__locale": "c",
 		"libft.h": "c",
-		"locale": "c"
+		"locale": "c",
+		"parcing.h": "c"
 	},
 	"workbench.colorCustomizations": {
 		"commandCenter.border": "#15202b99",

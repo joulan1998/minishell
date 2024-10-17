@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 09:46:08 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/12 20:44:39 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/17 15:28:31 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int exec(t_minishell *data)
 	int result;
 	if (data->list->type == BUILT_IN /*&& ft_lstsize_m(data->list) == 1*/)
 		result = start_execution(data);
-	if (ft_lstsize_m(data->list) == 1  && data->list->type == SIMPLE_COMMAND)
+	if (ft_lstsize_c(data->commands) == 1  && data->list->type == SIMPLE_COMMAND)
 		result = exec_smpl_cmnd(data);
-	else if (ft_lstsize_m(data->list) >= 2)
+	else if (ft_lstsize_c(data->commands) >= 2)
 		multi_commands(data);
 	// ft_free_table(&data->commands);
 	// ft_free_table(&data->args);
@@ -64,9 +64,11 @@ int main(int 	argc, char **argv, char **env)
         	classing(&data.list);
 			data.commands = settingargs(&data.list);
 			// printf(">>>>>$%s**\n",data.commands->args[1]);
+			// test_node_content(&data);
+			// test_list_content(&data);
 			g_signal = 1;
-			data.exit_s = exec(&data);
-			g_signal = 0;
+			data.exit_s = exec(&data);       //####### the executioon function
+			// g_signal = 0;
 			// exit(9);
 		}
 		// data.tokens = ft_tokenize();

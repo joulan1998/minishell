@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 05:41:19 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/12 18:46:37 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:53:03 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -186,4 +187,14 @@ void	ctrl_c_sig(int sig);
 int	ft_lstsize_m(t_list	*lst);		
 int	ft_lstsize_c(set_args	*lst);
 
+
+
+
+
+
+
+		// ************FOR_TESTING***************     >>>>  
+void	test_node_content(t_minishell *data);
+void	test_list_content(t_minishell *data);
+			
 #endif

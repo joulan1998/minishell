@@ -6,7 +6,7 @@
 #    By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 03:45:54 by ael-garr          #+#    #+#              #
-#    Updated: 2024/10/12 18:23:03 by ael-garr         ###   ########.fr        #
+#    Updated: 2024/10/17 13:29:09 by ael-garr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ BASIC_SRC = main.c libft/ft_sort_params.c libft/ft_strjoin.c libft/ft_strncmp.c 
 			../parcing/classing.c ../parcing/expand.c ../parcing/helper2.c ../parcing/herdeocfile.c ../parcing/helper.c ../parcing/lst.c  ../parcing/ofred.c ../parcing/parsing.c ../parcing/parsing_word_space.c ../parcing/settinglist.c ../parcing/syntax1.c ../parcing/syntax2.c\
 			utils/for_merging.c\
 			signals/init_signals.c\
+			test_node_content.c
 
 
 
