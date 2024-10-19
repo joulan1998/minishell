@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 05:41:19 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/17 18:53:03 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:31:26 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,5 +196,6 @@ int	ft_lstsize_c(set_args	*lst);
 		// ************FOR_TESTING***************     >>>>  
 void	test_node_content(t_minishell *data);
 void	test_list_content(t_minishell *data);
+void c_collector(t_minishell *data);
 			
 #endif

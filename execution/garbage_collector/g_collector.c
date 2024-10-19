@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   g_collector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/03 17:08:13 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/12 18:37:02 by ael-garr         ###   ########.fr       */
+/*   Created: 2024/10/18 22:42:17 by ael-garr          #+#    #+#             */
+/*   Updated: 2024/10/19 11:33:25 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int ft_ls(t_minishell *data)
+void	free_commands(set_args *list)
 {
-	struct  dirent *dirread;
-	DIR *dir;
-	if (data->commands->args[1])
-		dir = opendir(data->commands->args[1]);
-	else 
-		dir = opendir(".");
-	dirread = readdir(dir);
-	while (dirread)
+	while (list)
 	{
-		printf("%s\n",dirread->d_name);
+		ft_free_table(&list->args);
+		list = list->next;
 	}
 	
-	return (0);
+}
+
+void	free_t_list(t_list *list)
+{
+	t_list	*lst;
+	lst = list;
+	while (lst)
+	{
+		free(lst->content);
+		lst = lst->next;
+	}
 	
-	
+}
+void c_collector(t_minishell *data)
+{
+	free_commands(data->commands);
+	free_t_list(data->list);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 19:15:29 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/12 18:43:20 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/19 15:35:00 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,21 +159,24 @@ int	ft_exittoi(char *s)
 
 int ft_exit(t_minishell *data)
 {
-	int exit_s;
-	char *local;
+	// int exit_s;
+	// char *local;
 	
-	local = data->commands->args[1];
-	exit_s = data->exit_s;
-	if(data->commands->args[1])
-	{
-		if (is_number(data->commands->args[1]) && data->commands->args[2])
-			ft_err_msg((t_error){TOO_MANY_ARGS ,ENO_TOO_MANY_ARGS,NULL});
-		else
-			exit_s = ft_exittoi(data->commands->args[1]);
-	}
-	// ft_free_table(&data->args);
-	garbage_collector(data);
-	exit(exit_s);
-	(void)data;
-	return(0);
+	// local = data->commands->args[1];
+	// exit_s = data->exit_s;
+	// if(data->commands->args[1])
+	// {
+	// 	if (is_number(data->commands->args[1]) && data->commands->args[2])
+	// 		ft_err_msg((t_error){TOO_MANY_ARGS ,ENO_TOO_MANY_ARGS,NULL});
+	// 	else
+	// 		exit_s = ft_exittoi(data->commands->args[1]);
+	// }
+	// // ft_free_table(&data->args);
+	// garbage_collector(data);
+	// exit(exit_s);
+	// (void)data;
+	
+	c_collector(data);
+	exit(0);
+	// return(0);
 }

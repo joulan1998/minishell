@@ -6,25 +6,24 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:21:55 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/09/21 15:04:17 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/19 15:46:03 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char *extract_value(char *line)
+char	*extract_value(char *line)
 {
-	char 	*local;
-	char *result;
-	int i;
-
+	char	*local;
+	char	*result;
+	int		i;
 
 	local = line;
 	i = 0;
 	if (!ft_strchr(line, '='))
-		return(NULL);
-	result = malloc(ft_strlen(ft_strchr(line,'=') + 1));
-	while(*local != '=')
+		return (NULL);
+	result = malloc(ft_strlen(ft_strchr(line, '=') + 1));
+	while (*local != '=')
 		local++;
 	if (*local == '=')
 		local++;
@@ -38,23 +37,23 @@ char *extract_value(char *line)
 	return (result);
 }
 
-int to_alloc(char *s ,char c)
+int	to_alloc(char *s, char c)
 {
-	char *res;
-	int result;
+	char	*res;
+	int		result;
+
 	res = s;
-	
 	result = 0;
 	while (res[result] && res[result] != c)
 		result++;
-	return (result);	
+	return (result);
 }
 
-char *extract_key(char *string)
+char	*extract_key(char *string)
 {
-	char *result;
-	int i;
-	
+	char	*result;
+	int		i;
+
 	i = 0;
 	if (!*string)
 		return (NULL);
@@ -72,40 +71,41 @@ char *extract_key(char *string)
 
 int	check_syntax_for_export(char *string)
 {
-	char *local;
-	int i;
-	i = 0;
+	char	*local;
+	int		i;
+
+	i = -1;
 	local = extract_key(string);
 	if (ft_strlen(local) == 1)
 	{
 		if ((ft_isalpha(local[0])) || local[0] == '_')
-			return (free(local),1);
+			return (free(local), 1);
 		else
-		return (free(local),0);
+			return (free(local), 0);
 	}
 	else
-	{	
-		// if (!ft_isalpha(local[0]) && (local[0] != '_'))
-		// 	return(free(local),0);
-		while (i < ((int)ft_strlen(local) - 1))
+	{
+		while (++i < ((int)ft_strlen(local) - 1))
 		{
-			if (!ft_isalpha(local[i]) && !ft_isdigit(local[i]) && local[i] != '_')
-				return(free(local),0);
-			i++;
+			if (!ft_isalpha(local[i])
+				&& !ft_isdigit(local[i]) && local[i] != '_')
+				return (free(local), 0);
 		}
-		if (ft_isalpha(local[i]) || ft_isdigit(local[i]) || local[i] == '+' || local[i] == '_')
-			return(free(local),1);
+		if (ft_isalpha(local[i]) || ft_isdigit(local[i])
+			|| local[i] == '+' || local[i] == '_')
+			return (free(local), 1);
 	}
-	return(free(local),0);
+	return (free(local), 0);
 }
 
 int	count_table_entries(char **table)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	if (!table || !*table)
 		return (0);
 	while (table[i])
 		i++;
-	return(i);
+	return (i);
 }

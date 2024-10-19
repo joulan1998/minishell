@@ -1,19 +1,18 @@
 #include "../includes/minishell.h"
 
-t_environ *create_list(t_minishell *data)
+t_environ	*create_list(t_minishell	*data)
 {
-	char **table;
-	t_environ *lst = NULL; 
-	char *name;
-	char *value;
-	int i = 0;
-	int  j;
-	int x = 0;
+	char		**table;
+	char		*name;
+	char		*value;
+	t_environ	*lst = NULL;
+	int			i = 0;
+	int			j;
+	int			x;
 
 	table = data->env;
 	if (!table[i] && !table[i][0])
 		return(NULL);
-	
 	while (table[i])
 	{
 		name = malloc(to_alloc(table[i], '='));

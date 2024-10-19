@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 09:46:08 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/17 15:28:31 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:58:21 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void f(){
 }
 int main(int 	argc, char **argv, char **env)
 {
-	// atexit(f);
+	atexit(f);
 	(void)argc;
 	(void)argv;
 	t_minishell data;
@@ -51,11 +51,9 @@ int main(int 	argc, char **argv, char **env)
 		data.line = readline(PROMPT);   //TO_FREE 
 		if (!data.line)
 			break ;
-		// data.args = ft_split(data.line, ' ');
-		// data.commands = ft_split(data.line, '|');	  //TO_FREE
-		
 		if (data.line && data.line[0])
 		{
+			// exit(9);
 			add_history(data.line);
 			// small_parse(&data, data.args[0]);
 			data.list = parsing(data.line);
@@ -68,10 +66,8 @@ int main(int 	argc, char **argv, char **env)
 			// test_list_content(&data);
 			g_signal = 1;
 			data.exit_s = exec(&data);       //####### the executioon function
-			// g_signal = 0;
-			// exit(9);
+			g_signal = 0;
 		}
-		// data.tokens = ft_tokenize();
 		// clear_history();
 	}
 	return(0);
@@ -88,10 +84,8 @@ int start_execution(t_minishell *data)
 		data->exit_s = ft_pwd(data);
 	else if (!ft_strncmp(data->list->content, "echo", 5))
 		ft_echo(data);
-	else if (!ft_strncmp(data->list->content, "export", 7)){
-		puts("exportd has lunched ");		
+	else if (!ft_strncmp(data->list->content, "export", 7))	
 		ft_export(data);
-	}
 	else if (!ft_strncmp(data->list->content, "env", 4))
 		ft_env(data);
 	else if (!ft_strncmp(data->list->content, "exit", 5))
