@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:07:04 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/21 11:21:26 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/21 17:33:22 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,33 @@ static int	parse_variable(char *str, int i, t_list **lst)
 	return i;
 }
 
-static int	parse_quote(char *str, int i, t_list **lst, char quote_type)
+int parse_quote(char *str, int i, t_list **lst) 
 {
-	t_list	*new_node;
-	int		k;
+    t_list *node;
+    int j;
+    char quote_char;
 
-	k = i;
-	i++;
-	while (str[i] && str[i] != quote_type)
-		i++;
-	new_node = ft_lstnew(ft_substr(str, k + 1, i - k - 1));
-	if (quote_type == '\'')
-		new_node->command = S_QUOTE;
-	else
-		new_node->command = D_QUOTE;
-	ft_lstadd_back(lst, new_node);
-	return i;
+    j = i;
+    quote_char = str[i];
+    i++;
+
+    while (str[i] && str[i] != quote_char)
+        i++;
+
+    if (str[i] == '\0') 
+    {
+        ft_putstr_fd("syntax error\n", 2);
+        exit_status(258, 1);
+        return -1;
+    }
+
+    node = ft_lstnew(ft_substr(str, j, (i - j) + 1));
+    if (quote_char == '"')
+        node->command = D_QUOTE;
+    else if (quote_char == '\'')
+        node->command = S_QUOTE;
+    ft_lstadd_back(lst, node);
+    return i;
 }
 
 t_list	*parsing(char *str)
@@ -106,7 +117,11 @@ t_list	*parsing(char *str)
         else if (str[i] == '$' && str[i + 1])
             i = parse_variable(str, i, &lst);
         else if (str[i] == '\'' || str[i] == '"')
-            i = parse_quote(str, i, &lst, str[i]);
+		{
+            i = parse_quote(str, i, &lst);
+			if (i < 0)
+				break;
+		}
         else if (str[i] == ' ' || str[i] == '\t')
             i = parse_spaces(str, i, &lst);
 		else

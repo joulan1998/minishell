@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:58:15 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/21 11:22:37 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/21 17:20:18 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	*ft_itoa(int n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putchar_fd(char c, int fd);
 
 
 
@@ -87,6 +89,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 t_list  *parsing(char *str);
 int     parse_word(char *str, int i, t_list **lst);
 int     parse_spaces(char *str, int i, t_list **lst);
+int     parse_quote(char *str, int i, t_list **lst);
 void    classing(t_list **lst);
 
 // syntax functions
@@ -97,7 +100,6 @@ int     is_valid_next(t_list *token);
 int     syntax_redpipe(t_list **lst);
 int     syntax_consecutive_redirection(t_list **lst);
 int     syntax_end_of_command(t_list **lst);
-int     syntax_quotes(t_list **lst);
 int     syntax(t_list **lst);
 int     error_message();
 
@@ -116,5 +118,7 @@ void storing_args(t_list **current, set_args *cmd_args);
 //settinglist
 set_args *settingargs(t_list **lst);
 
+// exitstatus
+int	exit_status(int new_stat, int set);
 
 #endif
