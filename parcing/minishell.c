@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:10:03 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/12 16:01:32 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/21 11:05:17 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main(int ac, char **av)
 
         lst = parsing(input);
         syntax(&lst);
+        printf("||||||||||||||||||||||||||||||||");
         classing(&lst);
         
         arg = settingargs(&lst);

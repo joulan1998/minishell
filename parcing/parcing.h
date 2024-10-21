@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:58:15 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/12 17:46:39 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:22:37 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARCING_H
 # define PARCING_H
 
-// #include <readline/readline.h>
-// #include <readline/history.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>

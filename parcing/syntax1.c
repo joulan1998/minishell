@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:20:17 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/12 14:34:07 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/21 11:12:33 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int is_valid_next(t_list *token)
     return (token && (token->command == S_QUOTE 
                     ||token->command == D_QUOTE 
                     || token->command == WORD
-                    || token->type == VAR));
+                    || token->command == VAR));
 }
 int syntax_redpipe(t_list **lst)
 {
@@ -55,7 +55,6 @@ int syntax_redpipe(t_list **lst)
 int syntax_consecutive_redirection(t_list **lst)
 {
     t_list  *current;
-    char    *str;
     
     current = *lst;
 
@@ -66,15 +65,11 @@ int syntax_consecutive_redirection(t_list **lst)
             t_list *next_token;
             
             next_token = current->next;
-
+            
             while (next_token && is_space(next_token))
                 next_token = next_token->next;
-
             if (next_token && is_redirection(next_token))
-            {
-                str = next_token->content;
                 return (1);
-            }
         }
         current = current->next;
     }

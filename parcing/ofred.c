@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ofred.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:11:35 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/12 17:35:51 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:29:47 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_list *skip_spaces(t_list *token)
 {
     while (token && token->command == SPACEE)
         token = token->next;
+    printf("|||||||||||||||||||%s||||||||||||||", token->content);
     return token;
 }
 
@@ -54,13 +55,18 @@ void handle_redirections(t_list *token, set_args *cmd_args)
         if (cmd_args->output != 1)
             close(cmd_args->output);
         token = skip_spaces(token->next);
-        if (token)
-            cmd_args->output = open_file(token->content, O_CREAT | O_RDWR | 644);
+        if(!token)
+            return;
+        else if (token)
+            cmd_args->output = open_file(token->content, O_CREAT | O_RDWR | 666);
+        
     }
     else if (token->command == RD_IN) 
     {
         token = skip_spaces(token->next);
-        if (token)
+        if (!token)
+            return;
+        else if (token)
             cmd_args->input = open_file(token->content, O_RDONLY);
     }
     else if (token->command == APPEND) 
@@ -68,8 +74,10 @@ void handle_redirections(t_list *token, set_args *cmd_args)
         if (cmd_args->output != 1)
             close(cmd_args->output);
         token = skip_spaces(token->next);
-        if (token)
-            cmd_args->output = open_file(token->content, O_CREAT | O_WRONLY | O_APPEND | 644);
+        if (!token)
+            return;
+        else if (token)
+            cmd_args->output = open_file(token->content, O_CREAT | O_WRONLY | O_APPEND | 666);
     }
     else if (token->command == HEREDOC)
         cmd_args->output = create_unique_heredoc_file();
