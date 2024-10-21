@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 05:41:19 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/19 11:31:26 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:51:45 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,9 @@
 # include <limits.h>
 # include <sys/types.h>
 # include <sys/uio.h>
-
-
-# include <unistd.h>
-# include <dirent.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <stdio.h>
-# include <fcntl.h>
 # include <termios.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
 # define	PROMPT	"minishell$ "
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
@@ -116,6 +105,7 @@ typedef struct s_minishell
 	// t_token			*tokens;
 	t_environ *env_lst;
 	int exit_s;
+	int status;
 	int stdin;
 	int stdout;
 	char	*old_path;
@@ -136,23 +126,24 @@ typedef struct s_minishell
 // void	ft_putstr_fd(char *s, int fd);
 int	start_execution(t_minishell	*data);
 // void	init_signals(void);
-void ctl_d_signal(int sig);
+void	ctl_d_signal(int sig);
 		// ************BUITL_INS***************
 int	ft_cd(t_minishell *data);
-int ft_echo(t_minishell *data);
-int ft_ls(t_minishell *data);
-int ft_env(t_minishell *data);
-int ft_error(/*t_minishell *data,*/char	*first, t_tags message);
-int ft_exit(t_minishell *data);
-int to_alloc(char *s ,char c);
+int	ft_echo(t_minishell *data);
+int	ft_ls(t_minishell *data);
+int	ft_env(t_minishell *data);
+int	ft_error(/*t_minishell *data,*/char	*first, t_tags message);
+int	ft_exit(t_minishell *data);
+int	to_alloc(char *s ,char c);
 int	ft_pwd(t_minishell *data);
 		// ************BUITL_INS***************     >>>>   export
+int	final_update(t_minishell *data, char *key, char *value, bool create);
 int	ft_export(t_minishell *data);
 int	ft_error_export_2_args(/*t_minishell *data,*/char *fctn_name, char *command);
-char *extract_key(char *string);
+char	 *extract_key(char *string);
 int	check_syntax_for_export(char *string);
-char *extract_value(char *line);
-int ft_err_msg(t_error error);
+char	*extract_value(char *line);
+int	ft_err_msg(t_error error);
 int	print_export(t_minishell *data);
 t_environ *create_list(t_minishell *data);
 t_environ	*ft_lstnew_env(char *var, char *value);
@@ -165,37 +156,24 @@ char	*ft_find_node(t_minishell *data, char	*str);
 		// ************BUITL_INS***************     >>>>   export
 int	exec_smpl_cmnd(t_minishell *data);
 		// ************UTILS***************
-int ft_free_table(char	***table);
-int free_table(t_minishell *data);
+int	ft_free_table(char	***table);
+int	free_table(t_minishell *data);
 char	*joinning_and_free(char *s1, char	*s2);
-char *check_acces(t_minishell *data, char *ftn);
+char	*check_acces(t_minishell *data, char *ftn);
 		// ************MULTI COMMANDS***************     >>>>   export
-
-int exe_commands(t_minishell *data);
-int multi_commands(t_minishell *data);
+int	exe_commands(t_minishell *data);
+int	multi_commands(t_minishell *data);
 		// ************TEMPOPARY***************     >>>>   export
 int small_parse(t_minishell *data, char *cmd);
-
 		// ************SIGNALS***************     >>>>   signals
 void	init_signl(void);
 void	ctrl_c_sig(int sig);
-
-
-
 		// ************FOR_NERGING***************     >>>>   youssef
-
-int	ft_lstsize_m(t_list	*lst);		
-int	ft_lstsize_c(set_args	*lst);
-
-
-
-
-
-
-
+int		ft_lstsize_m(t_list	*lst);		
+int		ft_lstsize_c(set_args	*lst);
 		// ************FOR_TESTING***************     >>>>  
 void	test_node_content(t_minishell *data);
 void	test_list_content(t_minishell *data);
-void c_collector(t_minishell *data);
-			
+void	c_collector(t_minishell *data);
+int		joinning_for_print(t_environ **node, char **list);
 #endif

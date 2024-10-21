@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 16:43:28 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/17 16:08:18 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:46:11 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@ void	ctrl_c_sig(int sig)
 {
 	if (g_signal == 1)
 		return ;
-	rl_replace_line("", 0);
+	// rl_redisplay();
+    // printf("\n");
+    // rl_on_new_line();
+    // rl_replace_line("", 0);
+    // rl_redisplay();
+	rl_redisplay();
 	printf("\n");
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
 	(void)sig;
 }

@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 20:18:08 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/12 19:59:11 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:49:04 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	exec_much_cmnd(t_minishell *data, char *path, int in, int out, int upipe)
 		perror("forking :");
 	else if (fork_res == 0)
 	{
+		dprintf(2, "inside the (exec_much_commands >>> %d\n)",getpid());
 		close(upipe);
 		if (out)
 		{

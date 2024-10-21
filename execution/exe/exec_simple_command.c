@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:47:49 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/19 13:33:53 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:04:56 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*check_acces(t_minishell *data, char *ftn)
 		free (node_contet);
 		ft_free_table (&table);
 	}
-	return (ftn);
+	return (NULL);
 }
 
 void	handle_access_cases(int	error)
@@ -61,27 +61,30 @@ int	exec_smpl_cmnd(t_minishell *data)
 {
 	char	*path;
 	int		fork_res;
-	int 	exec_res;
+	// int 	exec_res;
 
-	// puts("simpl commands had started\n");
 	path = check_acces (data, data->commands->args[0]);
 	fork_res = fork();
 	if (fork_res == -1)
 		return (perror (PROMPT), -1);
 	if (fork_res == 0)
 	{
-		exec_res = execve(path, data->commands->args, (data->env));
-		ft_putstr_fd ("minishell :", 2);
-		free (path);
-		// puts("\0");
-		// exit (EXIT_FAILURE);
-		return (perror (path), 127);
+		if (execve(path, data->commands->args, (data->env)) == -1)
+		{
+			ft_putstr_fd("COMMAND NOT FOUND \n", 2);
+			// free (path);
+			exit (127);
+		}
+		// return ( 127);
 	}
 	else
 	{
-		wait (NULL);
+		while (waitpid (fork_res, &data->status, 0) != -1)
+			;
+		printf("######>>>>>>>>is %d\n",data->status);
+		// wait(NULL);
 		// ft_free_table(&data->commands); // chech for exit status
 		free (path);
 	}
-	return (0);
+	return (data->status);
 }

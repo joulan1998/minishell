@@ -6,7 +6,7 @@
 #    By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 03:45:54 by ael-garr          #+#    #+#              #
-#    Updated: 2024/10/18 22:47:02 by ael-garr         ###   ########.fr        #
+#    Updated: 2024/10/21 11:25:12 by ael-garr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,11 @@ CC = cc
 
 all : ${NAME}
 
-$(NAME): $(OBJ) 
-		${CC} ${CFLAG} ${OBJ} -L ${READLINE_L} -o ${NAME} -lreadline
-
-
 %.o: %.c includes/minishell.h
 		@${CC} ${CFLAG} -I ${READLINE_I} -c $< -o $@
+		
+$(NAME): $(OBJ) 
+		${CC} ${CFLAG} ${OBJ} -L ${READLINE_L} -o ${NAME} -lreadline
 
 norm :
 	@norminette

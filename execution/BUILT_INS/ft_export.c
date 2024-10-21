@@ -6,52 +6,23 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:48:34 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/19 15:30:24 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:46:33 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	final_update(t_minishell *data, char *key, char *value, bool create)
-{
-	t_environ	*lst;
-
-	lst = data->env_lst;
-	if (!create)
-	{
-		while (lst)
-		{
-			if (!ft_strncmp(lst->var, key, (ft_strlen(lst->var) + 1)))
-			{
-				if (value)
-				{
-					free (lst->value);
-					lst->value = value;
-				}
-			}
-			lst = lst->next;
-		}
-		return (0);
-	}
-	else
-		return (ft_lstadd_back_env
-			(&data->env_lst, ft_lstnew_env(key, value)), 0);
-	return (1);
-}
-
 int	test_print(t_minishell *data)
 {
 	t_environ	*local_lst;
 	int			i;
-	char		*temp;
-	char		*temp1;
 	char		**list;
 
-	list = malloc((ft_lstsize(data->env_lst) + 1) * sizeof(char *));
+	i = 0;
 	local_lst = data->env_lst;
+	list = malloc((ft_lstsize(data->env_lst) + 1) * sizeof(char *));
 	if (!list)
 		return (0);
-	i = 0;
 	while (local_lst)
 	{
 		if (!ft_strncmp(local_lst->var, "_", 2))
@@ -59,19 +30,9 @@ int	test_print(t_minishell *data)
 			local_lst = local_lst->next;
 			continue ;
 		}
-		if (!local_lst->value)
-			list[i] = ft_strjoin(local_lst->var, "=");
-		else
-		{
-			temp = ft_strjoin(local_lst->var, "=\"");
-			temp1 = ft_strjoin(local_lst->value, "\"");
-			if (!temp || !temp1)
-				return (ft_free_table(&list), -1);
-			list[i] = ft_strjoin(temp, temp1);
-			free (temp);
-			free (temp1);
-		}
-		i++;
+		joinning_for_print(&local_lst, &list[i]);
+		if (!list[i++])
+			return (ft_free_table(&list), -1);
 		local_lst = local_lst->next;
 	}
 	list[i] = NULL;
