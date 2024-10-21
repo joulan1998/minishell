@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:20:17 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/21 11:12:33 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/21 12:18:07 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int syntax_consecutive_redirection(t_list **lst)
             
             while (next_token && is_space(next_token))
                 next_token = next_token->next;
+            
             if (next_token && is_redirection(next_token))
                 return (1);
         }

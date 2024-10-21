@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:10:03 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/21 11:05:17 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/21 12:49:10 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,7 @@ int main(int ac, char **av)
         }
 
         lst = parsing(input);
-        syntax(&lst);
-        printf("||||||||||||||||||||||||||||||||");
-        classing(&lst);
-        
-        arg = settingargs(&lst);
-
         tmp = lst;
-        
-        
-        //PRINTING TOKENS AND TYPE OF COMMAND
         while (tmp)
         {
             printf("Token: %s, Type: %u\n", (char *)tmp->content, tmp->command);
@@ -50,6 +41,14 @@ int main(int ac, char **av)
         
         
         printf("#########\n#########\n#########\n#########\n");
+        syntax(&lst);
+        classing(&lst);
+        
+        arg = settingargs(&lst);
+
+        
+        
+        //PRINTING TOKENS AND TYPE OF COMMAND
         
         
         set_args *current_args = arg;
