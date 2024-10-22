@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settinglist.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:44:50 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/12 20:24:51 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:59:03 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ void storing_args(t_list **current, set_args *cmd_args)
             add_arg_to_set_args(cmd_args, (*current)->content);
 		else if ((*current)->command == VAR)
         {
-            char *var_value;
-            
-            var_value = get_var_value((*current)->content);
-            add_arg_to_set_args(cmd_args, var_value);
+                        add_arg_to_set_args(cmd_args, (*current)->content);
+
         }
         else if ((*current)->command == RD_IN || (*current)->command == RD_OUT ||
                  (*current)->command == APPEND || (*current)->command == HEREDOC)

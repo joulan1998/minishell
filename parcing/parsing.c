@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:07:04 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/21 17:33:22 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/22 13:15:29 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int	parse_variable(char *str, int i, t_list **lst)
 	{
 		while (str[i] && str[i] != ' ' && str[i] != '|' && str[i] != '>' && str[i] != '<' && str[i] != '\'' && str[i] != '"')
 			i++;
+		i--;
 		new_node = ft_lstnew(ft_substr(str, k + 1, i - k));
 		new_node->command = VAR;
 		ft_lstadd_back(lst, new_node);
