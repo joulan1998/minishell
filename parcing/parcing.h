@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:58:15 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/21 17:20:18 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/23 12:49:03 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-typedef struct enviroment
+
+typedef struct s_env
 {
-    char **env;
-} env_struct;
+	char	*name;
+	char	*value;
+}	t_env;
 
 typedef struct set_list
 {
@@ -38,6 +40,12 @@ typedef enum s_type
     BUILT_IN,
     SIMPLE_COMMAND,
 } t_type;
+
+typedef struct s_heredoc_info
+{
+	char	*file_name;
+	int		input;
+}	t_heredoc_info;
 
 typedef enum s_command
 {
@@ -82,6 +90,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+
 
 
 
@@ -110,10 +120,12 @@ char *get_var_value(char *str);
 int create_unique_heredoc_file();
 
 //openingfiles / handling red
-int pipe_counter(t_list **lst);
-void handle_redirections(t_list *token, set_args *cmd_args);
-void add_arg_to_set_args(set_args *cmd_args, char *new_arg);
-void storing_args(t_list **current, set_args *cmd_args);
+int     pipe_counter(t_list **lst);
+void    handle_redirections(t_list *token, set_args *cmd_args);
+void    add_arg_to_set_args(set_args *cmd_args, char *new_arg);
+void    storing_args(t_list **current, set_args *cmd_args);
+void	handle_herdoc(int input, char *del, t_list *env, t_list *token);
+
 
 //settinglist
 set_args *settingargs(t_list **lst);

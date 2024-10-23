@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 11:10:03 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/21 12:49:10 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/23 12:44:14 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int ac, char **av)
 
     while (1)
     {
-        input = readline("> ");
+        input = readline("minishell$ ");
         if (input == NULL || ft_strcmp(input, "exit") == 0)
         {
             free(input);

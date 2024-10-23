@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 16:43:28 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/17 16:08:18 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:22:29 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ctrl_c_sig(int sig)
 {
 	if (g_signal == 1)
 		return ;
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	printf("\n");
 	rl_on_new_line();
 	rl_redisplay();

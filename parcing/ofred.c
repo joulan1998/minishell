@@ -6,7 +6,7 @@
 /*   By: yosabir <yosabir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:11:35 by yosabir           #+#    #+#             */
-/*   Updated: 2024/10/21 14:12:45 by yosabir          ###   ########.fr       */
+/*   Updated: 2024/10/23 12:51:05 by yosabir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_list *skip_spaces(t_list *token)
     return token;
 }
 
-void handle_redirections(t_list *token, set_args *cmd_args) 
+void handle_redirections(t_list *token, set_args *cmd_args, t_list *environement) 
 {
     cmd_args->input = 0;
     cmd_args->output = 1;
@@ -82,5 +82,10 @@ void handle_redirections(t_list *token, set_args *cmd_args)
             cmd_args->output = open_file(token->content, O_CREAT | O_WRONLY | O_APPEND | 0666);
     }
     else if (token->command == HEREDOC)
-        cmd_args->output = create_unique_heredoc_file();
+    {
+        token = skip_spaces(token->next);
+        if (!token)
+            return;
+        handle_herdoc(cmd_args->input, token->content, environement, token);
+    }
 }
