@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 05:41:19 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/21 13:51:45 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/24 19:57:09 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef enum e_tags{
 	COMMAND_NOT_FOUND,
 	TOO_MANY_ARGS,
 	NUMRC_ARG_REQUIRED,
-	
+	PERM_ERROR,
+	NOSUCHFORD,
 }	t_tags;
 
 typedef enum e_no{

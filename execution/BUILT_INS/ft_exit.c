@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 19:15:29 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/19 15:35:00 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/22 21:05:25 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ int ft_exit(t_minishell *data)
 	// exit(exit_s);
 	// (void)data;
 	
-	c_collector(data);
-	exit(0);
+	// c_collector(data);
+	exit(data->exit_s);
 	// return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:23:49 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/09/28 17:33:28 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/24 19:58:19 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,9 @@ int ft_error(/*t_minishell *data,*/char	*first, t_tags message)
 	ft_putstr_fd(first,2);
 	if (message == COMMAND_NOT_FOUND)
 		ft_putstr_fd(": command not found\n",2); 
+	if (message == PERM_ERROR)
+		ft_putstr_fd(": Permission denied\n",2); 
+	if (message == NOSUCHFORD)
+		ft_putstr_fd(": No such file or directory\n",2); 
 	return (0);
 }

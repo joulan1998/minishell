@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:43:06 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/21 19:01:51 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:54:03 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,12 @@ int	multi_commands(t_minishell	*data)
 	}
 	while (waitpid(-1, &data->status, 0) != -1)
 		;
+	if(WIFEXITED(data->status))
+		data->exit_s = WEXITSTATUS(data->status);
+	else if (WIFSIGNALED(data->status))
+		data->exit_s = WTERMSIG(data->status);
+	else 
+		data->exit_s =89;
+	printf("the status after executiong too much commands is>>%d\n",data->exit_s);
 	return (0);
 }

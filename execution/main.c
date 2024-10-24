@@ -6,7 +6,7 @@
 /*   By: ael-garr <ael-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 09:46:08 by ael-garr          #+#    #+#             */
-/*   Updated: 2024/10/21 19:44:56 by ael-garr         ###   ########.fr       */
+/*   Updated: 2024/10/24 20:17:09 by ael-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void f(){
 }
 int main(int 	argc, char **argv, char **env)
 {
-	atexit(f);
+	// atexit(f);
 	(void)argc;
 	(void)argv;
 	t_minishell data;
